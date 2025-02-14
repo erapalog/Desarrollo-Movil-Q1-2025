@@ -1,33 +1,13 @@
-import { View, Text, Alert } from 'react-native'
+import { View, Text, Alert, StyleSheet,FlatList, Button } from 'react-native'
 import React, { useEffect } from 'react'
 import { useContextTarea } from '../Provider/TareaProvider'
 
 export default function Home() {
 
-  const {tarea,setTarea} = useContextTarea();
+  const {tarea,getTarea} = useContextTarea();
 
-  const getTarea = async () =>{
 
-    try {
-      
-      const response = await fetch('http://192.168.0.5:5000/tarea',{
-        method:'GET',
-        headers:{
-          'Content-Type':'application/json'
-        }
-       })
 
-       const respuestaTarea= await response.json()
-       
-       setTarea(respuestaTarea)
-
-       Alert.alert('Mensaje','Informaicon recuperada')
-    } catch (error) {
-      Alert.alert('Error','Ocurrio un error ' + error)
-    }
-   
-
-  }
 
   useEffect(()=>{
       getTarea()
@@ -35,8 +15,41 @@ export default function Home() {
 
 
   return (
-    <View>
-      <Text>Home</Text>
+    <View style={style.container}>
+
+   {/* <FlatList
+        data={tarea}
+        keyExtractor={(item)=> item.id.toString()}
+        renderItem={
+          ({item})=> 
+            <Text>{item.descripcion}</Text>
+        
+        }
+      />*/}
+
+      {
+        tarea.map((item)=>(
+          <Text style={style.tarea}>{item.descripcion}</Text> 
+        ))
+      }
+
+
+      <Button title='Refrescar tareas' onPress={getTarea}></Button>
     </View>
   )
 }
+
+const style =StyleSheet.create({
+  container: {
+    flex:1,
+    padding:20,
+    alignItems:'center'
+  },
+  tarea:{
+    fontSize:18,
+    padding:10,
+    borderBottomWidth:1,
+    borderColor:'black',
+    width:'100%'
+  }
+})

@@ -4,5 +4,6 @@ import { Tarea } from "../Modelos/Tarea";
 export const ContextTarea= createContext({
     tarea: [] as Tarea[],
     setTarea: (tarea: Tarea[]) =>{},
-    agregarTarea: (texto:string) =>{}
+    agregarTarea: (texto:string) =>{},
+    getTarea: ()=>{}
 })
