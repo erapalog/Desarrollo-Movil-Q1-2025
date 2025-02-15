@@ -2,14 +2,13 @@ import { View, Text, Button, StyleSheet,TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { useContextTarea } from '../Provider/TareaProvider'
 import { useNavigation } from '@react-navigation/native'
+import { Tarea } from '../Modelos/Tarea'
 
 export default function AgregarTarea() {
 
   const navegacion = useNavigation()
-  const [texto, setTexto]= useState<string>('')
-  const [nombre, setNombre]= useState<string>('')
-
-  const {agregarTarea,getTarea} = useContextTarea();
+ // const [texto, setTexto]= useState<string>('')
+  const {agregarTarea,getTarea,texto,setTexto} = useContextTarea();
 
 
   function agregar(){
@@ -26,13 +25,7 @@ export default function AgregarTarea() {
     <View style={style.container}>
       <Text>Agregar tarea</Text>
 
-       <TextInput
-      placeholder='Agregar un nombre Tarea'
-      value={nombre}
-      onChangeText={setNombre}
-      style={style.input}
-      >
-      </TextInput>
+     
 
       <TextInput
       placeholder='Agregar descripcion Tarea'
