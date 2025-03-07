@@ -23,7 +23,7 @@ export default function Acelerometro() {
 
     const suscription= Accelerometer.addListener((accelerometro)=>{
 
-      console.log(accelerometro)
+      //console.log(accelerometro)
       setData(accelerometro);
       updateBallonPosition(accelerometro)
 
